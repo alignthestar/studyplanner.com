@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Study Group</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background-color: #fef6f0;
+            color: #5a5a5a;
+            margin: 0;
+            padding: 20px;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        header {
+            margin-bottom: 30px;
+            text-align: center;
+            color: #ff6f61;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            text-shadow: 1px 1px 2px #ffb6c1;
+        }
+
+        /* Warning Banner */
+        #warning-banner {
+            background-color: #fffb99;
+            color: #ff6f61;
+            text-align: center;
+            padding: 10px;
+            font-weight: bold;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            background-color: #fff4f4;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        input[type="text"], input[type="submit"] {
+            padding: 12px;
+            margin: 10px 0;
+            border: 2px solid #ffb6c1;
+            border-radius: 10px;
+            width: 100%;
+            font-size: 1em;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            background-color: #ffe4e1;
+        }
+
+        input[type="text"]:focus {
+            border-color: #ff6f61;
+            box-shadow: 0 0 5px rgba(255, 111, 97, 0.5);
+            outline: none;
+        }
+
+        #chatrooms {
+            margin-bottom: 20px;
+        }
+
+        .chatroom {
+            border: 2px solid #ffb6c1;
+            border-radius: 15px;
+            padding: 15px;
+            margin: 10px 0;
+            cursor: pointer;
+            background-color: #ffe4e1;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .chatroom:hover {
+            background-color: #ffb6c1;
+            transform: scale(1.02);
+        }
+
+        .active-chatroom {
+            background-color: #ff8da1;
+            font-weight: bold;
+        }
+
+        #chat {
+            border: 2px solid #ffb6c1;
+            border-radius: 15px;
+            padding: 10px;
+            height: 300px;
+            overflow-y: scroll;
+            margin-bottom: 10px;
+            display: none;
+            background-color: #fff;
+        }
+
+        .message {
+            padding: 8px;
+            border-radius: 10px;
+            margin: 5px 0;
+            max-width: 70%;
+            word-wrap: break-word;
+        }
+
+        .user-message {
+            background-color: #ffe4e1;
+            text-align: left;
+        }
+
+        .other-message {
+            background-color: #ffb6c1;
+            text-align: right;
+        }
+
+        #username-section {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        #username-input {
+            width: 100%;
+            padding: 12px;
+            font-size: 1em;
+            background-color: #ffe4e1;
+            border: 2px solid #ffb6c1;
+            border-radius: 10px;
+        }
+
+        /* Mobile styling */
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+
+            header h1 {
+                font-size: 2em;
+            }
+
+            input[type="text"], input[type="submit"] {
+                font-size: 1em;
+            }
+
+            .chatroom {
+                font-size: 0.9em;
+            }
+
+            #chat {
+                height: 250px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Create a New Study Group</h1>
+    </header>
+
+    <!-- Warning Banner -->
+    <div id="warning-banner">
+        ⚠️ This site is still under development. Some features may not work perfectly. Please be patient! 💖
+    </div>
+
+    <main>
+        <!-- Group Creation Form -->
+        <form id="group-form">
+            <input type="text" placeholder="Group Name" required>
+            <input type="text" placeholder="Description" required>
+            <input type="text" placeholder="Topics Covered" required>
+            <input type="submit" value="Create Group">
+        </form>
+
+        <!-- Chatrooms List -->
+        <div id="chatrooms">
+            <h2>Chatrooms:</h2>
+            <div class="chatroom" onclick="joinChatroom('Math Study Group')">Math Study Group</div>
+            <div class="chatroom" onclick="joinChatroom('Science Project Team')">Science Project Team</div>
+        </div>
+
+        <!-- Username Section -->
+        <div id="username-section">
+            <h2>Set Your Username</h2>
+            <input type="text" id="username-input" placeholder="Enter your username" required>
+        </div>
+
+        <!-- Chat Area -->
+        <div id="chat"></div>
+
+        <!-- Chat Input Form -->
+        <form id="chat-form" style="display: none;">
+            <input type="text" placeholder="Type your message..." required>
+            <input type="submit" value="Send">
+        </form>
+    </main>
+
+    <script>
+        let currentChatroom = null;
+        let username = '';
+
+        // Handle group creation
+        document.getElementById('group-form').onsubmit = function(e) {
+            e.preventDefault();
+            const groupName = this[0].value;
+            const description = this[1].value;
+            const topics = this[2].value;
+
+            const newGroup = document.createElement('div');
+            newGroup.className = 'chatroom';
+            newGroup.onclick = () => joinChatroom(groupName);
+            newGroup.textContent = `${groupName}: ${description} (Topics: ${topics})`;
+            document.getElementById('chatrooms').appendChild(newGroup);
+            this.reset();
+        };
+
+        // Function to join a chatroom
+        function joinChatroom(groupName) {
+            if (currentChatroom) {
+                document.querySelector('.chatroom.active-chatroom').classList.remove('active-chatroom');
+            }
+            currentChatroom = groupName;
+
+            // Update chatroom display
+            document.querySelectorAll('.chatroom').forEach(chatroom => {
+                if (chatroom.textContent.includes(groupName)) {
+                    chatroom.classList.add('active-chatroom');
+                }
+            });
+
+            // Show chat area and reset messages
+            document.getElementById('chat').style.display = 'block';
+            document.getElementById('chat').innerHTML = ''; // Clear previous messages
+            document.getElementById('chat-form').style.display = 'block'; // Show chat form
+        }
+
+        // Handle chat messages
+        document.getElementById('chat-form').onsubmit = function(e) {
+            e.preventDefault();
+            const messageText = this[0].value;
+            const chatContainer = document.getElementById('chat');
+
+            // Create message element
+            const messageElement = document.createElement('div');
+            messageElement.className = 'message user-message';
+            messageElement.textContent = `${username}: ${messageText}`; // Include username
+
+            // Append message to chat
+            chatContainer.appendChild(messageElement);
+            chatContainer.scrollTop = chatContainer.scrollHeight; // Scroll to the bottom
+            this.reset();
+        };
+
+        // Update username when input changes
+        document.getElementById('username-input').oninput = function() {
+            username = this.value || 'User'; // Default to 'User' if empty
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Planner - Home</title>
+    <style>
+body {
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #faf0e6; 
+  color: #333;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.dark-mode {
+  background-color: #4e4e4e; 
+  color: #f0f0f0;
+}
+
+header {
+            background-color: #ff8db4;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        header nav {
+            margin-top: 15px;
+        }
+
+        header nav a {
+            text-decoration: none;
+            margin: 10px;
+            color: white;
+            font-size: 1.1em;
+            font-weight: bold;
+            border-radius: 20px;
+            padding: 10px 20px;
+            background-color: #ff6b92;
+            transition: background-color 0.3s;
+        }
+
+        header nav a:hover {
+            background-color: #ff4c7f;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: #fff3f7;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+nav {
+  display: flex;
+  align-items: center;
+}
+
+nav a {
+  margin: 0 15px;
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+nav a:hover {
+  background-color: #ff69b4; 
+  color: #fff;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+}
+
+.profile-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid #ff69b4; 
+  margin-right: 10px;
+}
+
+.container {
+  padding: 20px;
+}
+
+section {
+  margin-bottom: 30px;
+  padding: 20px;
+  border-radius: 15px;
+  background-color: #ffffff; 
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border: 2px solid #ffb6c1; 
+}
+
+h1, h2 {
+  color: #ff69b4; 
+}
+
+button {
+  background-color: #ff69b4; 
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+  background-color: #ff1493; 
+  transform: scale(1.05); 
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="time"],
+input[type="url"],
+input[type="search"] {
+  padding: 10px;
+  margin: 10px 0;
+  border: 2px solid #ffb6c1;
+  border-radius: 10px;
+  transition: border-color 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus {
+  border-color: #ff69b4; 
+  outline: none;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  background: #ffe4e1; 
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#timer-display {
+  font-size: 28px;
+  margin-top: 10px;
+  font-weight: bold;
+  color: #ff69b4;
+}
+
+footer {
+  background-color: #ffb6c1; 
+  text-align: center;
+  padding: 15px;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  border-top: 5px solid #ff69b4; 
+}
+
+footer a {
+  color: #333;
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+#warning-banner {
+            background-color: #fffb99;
+            color: #ff6f61;
+            text-align: center;
+            padding: 10px;
+            font-weight: bold;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            background-color: #fff4f4;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="courses.html">📚 Courses</a>
+            <a href="calendar.html">📅 Calendar</a>
+            <a href="profile.html">👤 Profile</a>
+            <a href="dashboard.html">📊 Dashboard</a>
+            <form action="https://www.google.com/search" method="get" style="display:inline;">
+                <input type="search" name="q" placeholder="Search..." aria-label="Search">
+                <button type="submit">🔍</button>
+            </form>            
+        </nav>
+        <select id="language-select" onchange="changeLanguage(this.value)">
+            <option value="en">English</option>
+            <option value="es">Español</option>
+        </select>
+    </header>
+    <div id="warning-banner">
+        ⚠️ This site is still under development. Some features may not work perfectly. Please be patient! 💖
+    </div>
+
+    <div class="container">
+        <main>
+            <section class="welcome-section">
+                <h1>Welcome to Your Study Planner!</h1>
+                <p>Your personalized space for study management, course tracking, and community engagement.</p>
+                <button onclick="document.location='dashboard.html'">Get Started</button>
+            </section>
+
+            <section class="features">
+                <h2>Explore Features</h2>
+                <div class="feature-cards">
+                    <div class="feature-card">
+                        <h3>Manage Your Courses</h3>
+                        <p>Organize and track your courses efficiently.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Track Your Progress</h3>
+                        <p>Stay motivated by monitoring your study progress.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Join the Community</h3>
+                        <p>Engage with fellow students and share resources.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="latest-posts">
+                <h2>Latest Community Posts</h2>
+                <div class="post-feed" id="post-feed">
+                    <div class="post">
+                        <strong>User A</strong>
+                        <p>Just finished a big project! Feeling accomplished! 🎉</p>
+                    </div>
+                    <div class="post">
+                        <strong>User B</strong>
+                        <p>Need study tips for finals! Anyone have suggestions?</p>
+                    </div>
+                </div>
+                <form id="post-form">
+                    <input type="text" placeholder="Share something..." required>
+                    <button type="submit">Post</button>
+                </form>
+            </section>
+
+            <section class="study-schedule">
+                <h2>Create Your Study Schedule</h2>
+                <form id="schedule-form">
+                    <input type="text" placeholder="Subject" required>
+                    <input type="date" required>
+                    <input type="time" required>
+                    <button type="submit">Add to Schedule</button>
+                </form>
+                <div class="schedule-display">
+                    <h3>Your Schedule:</h3>
+                    <ul id="schedule-list"></ul>
+                </div>
+            </section>
+
+            <section class="study-groups">
+                <h2>Join a Study Group</h2>
+                <button onclick="document.location='create-group.html'">Create New Group</button>
+                <div class="groups-list">
+                    <h3>Available Groups:</h3>
+                    <ul id="groups-list">
+                        <li>Math Study Group</li>
+                        <li>Science Project Team</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="pomodoro-timer">
+                <h2>Pomodoro Timer</h2>
+                <button onclick="startPomodoro(25)">Start 25 Min Study</button>
+                <div id="timer-display">25:00</div>
+            </section>
+
+            <section class="goal-setting">
+                <h2>Set Your Goals</h2>
+                <form id="goal-form">
+                    <input type="text" placeholder="Goal" required>
+                    <input type="date" required>
+                    <button type="submit">Add Goal</button>
+                </form>
+                <div class="goal-display">
+                    <h3>Your Goals:</h3>
+                    <ul id="goal-list"></ul>
+                </div>
+            </section>
+
+            <section class="resource-sharing">
+                <h2>Share Study Resources</h2>
+                <form id="resource-form">
+                    <input type="text" placeholder="Resource Title" required>
+                    <input type="url" placeholder="Resource URL" required>
+                    <button type="submit">Share Resource</button>
+                </form>
+                <div class="resource-display">
+                    <h3>Shared Resources:</h3>
+                    <ul id="resource-list"></ul>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Study Planner. All rights reserved.</p>
+        <a href="support.html">Support</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Service</a>
+    </footer>
+
+    <script>
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+        }
+
+        window.onload = function() {
+            const darkMode = localStorage.getItem('darkMode') === 'true';
+            if (darkMode) {
+                document.body.classList.add('dark-mode');
+            }
+            const profileData = localStorage.getItem('profileData');
+            if (profileData) {
+                const data = JSON.parse(profileData);
+                document.getElementById('username-display').innerText = data.username || "User 1";
+                document.getElementById('profile-picture').src = data.profilePicture || "default-profile.png";
+            }
+        };
+
+        function changeLanguage(language) {
+            console.log(`Language changed to: ${language}`);
+        }
+
+        // Post functionality
+        document.getElementById('post-form').onsubmit = function(e) {
+    e.preventDefault();
+    const postText = this[0].value;
+    const postFeed = document.getElementById('post-feed');
+    const post = document.createElement('div');
+    post.className = 'post';
+    post.innerHTML = `<strong>${document.getElementById('username-display').innerText}</strong><p>${postText}</p>`;
+    postFeed.appendChild(post);
+    this.reset();
+      };
+
+        // Schedule functionality
+        document.getElementById('schedule-form').onsubmit = function(e) {
+            e.preventDefault();
+            const subject = this[0].value;
+            const date = this[1].value;
+            const time = this[2].value;
+            const scheduleList = document.getElementById('schedule-list');
+            const listItem = document.createElement('li');
+            listItem.textContent = `${subject} on ${date} at ${time}`;
+            scheduleList.appendChild(listItem);
+            this.reset();
+        };
+
+        // Pomodoro timer functionality
+        let timerInterval;
+        function startPomodoro(minutes) {
+            let time = minutes * 60;
+            const timerDisplay = document.getElementById('timer-display');
+            clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                const mins = Math.floor(time / 60);
+                const secs = time % 60;
+                timerDisplay.textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+                if (time <= 0) {
+                    clearInterval(timerInterval);
+                    alert("Time's up! Take a break.");
+                } else {
+                    time--;
+                }
+            }, 1000);
+        }
+
+        // Goal setting functionality
+        document.getElementById('goal-form').onsubmit = function(e) {
+            e.preventDefault();
+            const goalText = this[0].value;
+            const goalDate = this[1].value;
+            const goalList = document.getElementById('goal-list');
+            const listItem = document.createElement('li');
+            listItem.textContent = `${goalText} by ${goalDate}`;
+            goalList.appendChild(listItem);
+            this.reset();
+        };
+
+        // Resource sharing functionality
+        document.getElementById('resource-form').onsubmit = function(e) {
+            e.preventDefault();
+            const resourceTitle = this[0].value;
+            const resourceURL = this[1].value;
+            const resourceList = document.getElementById('resource-list');
+            const listItem = document.createElement('li');
+            listItem.innerHTML = `<a href="${resourceURL}" target="_blank">${resourceTitle}</a>`;
+            resourceList.appendChild(listItem);
+            this.reset();
+        };
+    </script>
+</body>
+</html>

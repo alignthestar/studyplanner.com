@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Courses</title>
+    <style>
+         #warning-banner {
+            background-color: #fffb99;
+            color: #ff6f61;
+            text-align: center;
+            padding: 10px;
+            font-weight: bold;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            background-color: #fff4f4;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', sans-serif;
+            background-color: #FFFAF0;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            color: #333;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        header {
+            background-color: #FFB6C1;
+            padding: 30px 0;
+            text-align: center;
+            color: white;
+            font-size: 32px;
+            border-bottom: 4px solid #FF69B4;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            border-radius: 0 0 20px 20px;
+            position: relative;
+        }
+
+        header h1 {
+            margin: 0;
+            font-family: 'Arial', sans-serif; 
+            font-weight: bold;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        header a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 15px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        header a:hover {
+            background-color: #FF69B4;
+            color: white;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #ff758f;
+            font-size: 16px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px;
+            font-size: 14px;
+            border: 2px solid #ffb6c1;
+            border-radius: 15px;
+            background-color: #fffaf0;
+            transition: border-color 0.3s ease;
+            color: #5f6368;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        textarea:focus,
+        select:focus {
+            border-color: #ff758f;
+            outline: none;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        button {
+            background-color: #ff758f;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 16px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 15px;
+        }
+
+        button:hover {
+            background-color: #ff5b7d;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #ffcad4;
+            color: white;
+            margin-top: 50px;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .course {
+            margin-bottom: 40px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #ff758f;
+        }
+
+        h3 {
+            color: #ff69b4;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to Our Video Courses!</h1>
+        <nav>
+            <a href="home.html">🏠 Home</a>
+            <a href="calendar.html">📅 Calendar</a>
+            <a href="profile.html">👤 Profile</a>
+            <a href="dashboard.html">📊 Dashboard</a>
+        </nav>
+    </header>
+    <div id="warning-banner">
+        ⚠️ This site is still under development. Some features may not work perfectly. Please be patient! 💖
+    </div>
+
+    <main class="container">
+        <section id="course-list">
+            <h2>Available Video Courses</h2>
+            <div class="course">
+                <h3>Course Title 1</h3>
+                <video width="320" height="240" controls>
+                    <source src="videos/course1.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <p>Description of Course 1. Learn about ...</p>
+                <button onclick="document.getElementById('feedback1').style.display='block'">Rate Now</button>
+                <div id="feedback1" style="display:none;">
+                    <h4>Feedback for Course Title 1</h4>
+                    <form action="submit_feedback.php" method="post">
+                        <label for="name1">Name:</label>
+                        <input type="text" id="name1" name="name" required>
+                        <label for="rating1">Rating (1-5):</label>
+                        <input type="number" id="rating1" name="rating" min="1" max="5" required>
+                        <label for="comments1">Comments:</label>
+                        <textarea id="comments1" name="comments" rows="4" required></textarea>
+                        <input type="hidden" name="course" value="Course Title 1">
+                        <input type="submit" value="Submit Feedback">
+                    </form>
+                </div>
+            </div>
+            <!-- Repeat for other courses -->
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Your Website Name. All rights reserved.</p>
+        <ul>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms of Service</a></li>
+        </ul>
+    </footer>
+
+    <div id="feedback-display"></div>
+
+    <script>
+        const form = document.querySelector('#feedback1 form');
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('name1').value;
+            const rating = document.getElementById('rating1').value;
+            const comments = document.getElementById('comments1').value;
+
+            const feedbackDisplay = document.getElementById('feedback-display');
+            feedbackDisplay.innerHTML += `<p><strong>${name}</strong> rated it <strong>${rating}</strong>/5: ${comments}</p>`;
+
+            form.reset();
+            document.getElementById('feedback1').style.display = 'none';
+        });
+    </script>
+</body>
+</html>

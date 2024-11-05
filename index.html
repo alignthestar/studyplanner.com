@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Student Planner</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fff8f3;
+            color: #4a4a4a;
+            padding: 20px;
+            margin: 0;
+        }
+
+        header {
+            background-color: #ff8db4;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        header nav {
+            margin-top: 15px;
+        }
+
+        header nav a {
+            text-decoration: none;
+            margin: 10px;
+            color: white;
+            font-size: 1.1em;
+            font-weight: bold;
+            border-radius: 20px;
+            padding: 10px 20px;
+            background-color: #ff6b92;
+            transition: background-color 0.3s;
+        }
+
+        header nav a:hover {
+            background-color: #ff4c7f;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: #fff3f7;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .section h2 {
+            color: #ff4c7f;
+            font-size: 2em;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-shadow: 2px 2px 8px rgba(255, 105, 180, 0.6);
+        }
+
+        .warning {
+            background-color: #fffc99;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: bold;
+            color: #6a6a00;
+            border: 2px solid #e2e200;
+            margin-bottom: 20px;
+        }
+
+        .feedback {
+            background-color: #fff9f1;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid #ff8db4;
+        }
+
+        .feedback h3 {
+            font-size: 1.8em;
+            color: #ff8db4;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .feedback input,
+        .feedback textarea {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: 2px solid #ff8db4;
+            border-radius: 20px;
+            font-size: 1.1em;
+            background-color: #f9d1e1;
+            color: #4a4a4a;
+            box-sizing: border-box;
+        }
+
+        .feedback button {
+            background-color: #ff8db4;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .feedback button:hover {
+            background-color: #ff6b92;
+        }
+
+        .star-rating {
+            font-size: 1.5em;
+            color: #ff8db4;
+            margin-bottom: 20px;
+        }
+
+        .star-rating input {
+            display: none;
+        }
+
+        .star-rating label {
+            cursor: pointer;
+            margin: 0 5px;
+            transition: color 0.2s;
+        }
+
+        .star-rating input:checked ~ label {
+            color: #ff4c7f;
+        }
+
+        .feedback.success-message {
+            display: none;
+            background-color: #d4edda;
+            padding: 15px;
+            border-radius: 10px;
+            color: #155724;
+            border: 2px solid #c3e6cb;
+            margin-top: 20px;
+        }
+
+        footer {
+            background-color: #ff4c7f;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            border-top: 5px solid #ff6b92;
+            border-radius: 20px;
+        }
+
+        footer p {
+            font-size: 1em;
+            margin: 0;
+        }
+
+        footer p a {
+            color: #ffefdb;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer p a:hover {
+            text-decoration: underline;
+        }
+
+        /* Mobile-first */
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 2em;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            .section h2 {
+                font-size: 1.6em;
+            }
+
+            .feedback input,
+            .feedback textarea {
+                font-size: 1em;
+                padding: 12px;
+            }
+
+            .feedback button {
+                font-size: 1.1em;
+                padding: 12px 25px;
+            }
+
+            footer p {
+                font-size: 0.9em;
+            }
+
+            header nav a {
+                font-size: 1em;
+                padding: 8px 15px;
+                margin: 5px;
+            }
+        }
+
+        /* Larger screens */
+        @media (min-width: 601px) {
+            .container {
+                padding: 30px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>🌸 Study Planner Calendar 🌸</h1>
+        <nav>
+            <a href="home.html">🏠 Home</a>
+            <a href="courses.html">📚 Courses</a>
+            <a href="profile.html">👤 Profile</a>
+            <a href="dashboard.html">📊 Dashboard</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="section">
+            <h2>About the Student Planner</h2>
+            <p>
+                The Student Planner is an innovative and easy-to-use tool designed to help students stay on top of their academic lives. Whether you’re juggling assignments, exams, study schedules, or extracurricular activities, this planner is here to help you stay organized and be more productive. We understand how challenging it can be to manage multiple tasks at once, which is why this planner was developed with your busy lifestyle in mind.
+            </p>
+            <p>
+                With features like a task manager, calendar view, and reminders, you’ll be able to plan your day efficiently, set achievable goals, and track your progress. The Student Planner empowers you to take control of your time and be more proactive in meeting deadlines, all while reducing stress.
+            </p>
+            <p>
+                Additionally, the Student Planner is designed to be flexible, allowing you to customize your experience based on your individual needs. Whether you’re a high school student preparing for exams or a university student managing assignments and group projects, the Student Planner will help you stay on track.
+            </p>
+        </div>
+
+        <div class="section warning">
+            <h3>Important Notice</h3>
+            <p>
+                Please note that this website is still under development. We’re working hard to bring you the best features and improvements, but some parts of the site may not be fully functional or might look incomplete. We apologize for any inconvenience this may cause, and we greatly appreciate your understanding as we continue to enhance the platform.
+            </p>
+            <p>
+                Your feedback is invaluable to us during this development phase, as it helps us build a tool that truly meets your needs. Thank you for your patience and support as we work to make this planner the best it can be.
+            </p>
+        </div>
+
+        <div class="section">
+            <h2>We Value Your Feedback!</h2>
+            <p>
+                We’re committed to making the Student Planner as user-friendly and helpful as possible. To achieve that, we need your input! We encourage you to leave your feedback, suggestions, or any issues you’ve encountered while using the site. Your insights will help us make continuous improvements and ensure that the planner is tailored to your needs.
+            </p>
+            <p>
+                Have a feature you’d like to see added? Encountered a bug that needs fixing? Or do you just want to share your thoughts? We’d love to hear from you. Every comment matters, and your contributions will directly shape the future of the Student Planner.
+            </p>
+            <div class="feedback">
+                <h3>Leave Us a Comment</h3>
+                <form action="#" method="POST" onsubmit="showSuccessMessage(event)">
+                    <label for="name">Your Name:</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                    
+                    <label for="feedback">Your Feedback:</label>
+                    <textarea id="feedback" name="feedback" rows="5" placeholder="Enter your suggestions or feedback" required></textarea>
+                    
+                    <label for="rating">Your Rating:</label>
+                    <div class="star-rating">
+                        <input type="radio" id="star5" name="rating" value="5">
+                        <label for="star5">&#9733;</label>
+                        <input type="radio" id="star4" name="rating" value="4">
+                        <label for="star4">&#9733;</label>
+                        <input type="radio" id="star3" name="rating" value="3">
+                        <label for="star3">&#9733;</label>
+                        <input type="radio" id="star2" name="rating" value="2">
+                        <label for="star2">&#9733;</label>
+                        <input type="radio" id="star1" name="rating" value="1">
+                        <label for="star1">&#9733;</label>
+                    </div>
+                    
+                    <button type="submit">Submit Feedback</button>
+                </form>
+                <div class="success-message">
+                    <p>Thank you for your feedback! Your comment has been successfully submitted.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Student Planner. All Rights Reserved. | Designed with students in mind</p>
+    </footer>
+
+    <script>
+        function showSuccessMessage(event) {
+            event.preventDefault(); // Prevent form submission to show success message
+            const successMessage = document.querySelector('.success-message');
+            successMessage.style.display = 'block';
+            document.querySelector('form').reset(); // Reset the form fields after submission
+        }
+    </script>
+
+</body>
+</html>

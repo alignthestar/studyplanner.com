@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Planner Calendar</title>
+    <link rel="stylesheet" href="styles1.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #ffeff0; /* Soft pastel pink background */
+            color: #333;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.5s ease;
+        }
+
+        header {
+            background-color: #ffb6c1;
+            padding: 15px;
+            text-align: center;
+            animation: headerFadeIn 1s ease-in-out;
+            border-bottom: 5px solid #ff6f91;
+        }
+
+        @keyframes headerFadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        #warning-banner {
+            background-color: #fffb99;
+            color: #ff6f61;
+            text-align: center;
+            padding: 10px;
+            font-weight: bold;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            background-color: #fff4f4;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        nav a {
+            margin: 0 20px;
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            font-size: 18px;
+            letter-spacing: 1px;
+            transition: color 0.3s ease-in-out;
+        }
+
+        nav a:hover {
+            color: #ff6f91;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 25px;
+            background: #fff;
+            border-radius: 30px;
+            box-shadow: 0 3px 20px rgba(0, 0, 0, 0.15);
+            border: 6px dashed #ff6f91;
+            animation: containerSlideIn 0.8s ease;
+        }
+
+        @keyframes containerSlideIn {
+            0% { transform: translateY(-50px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        .google-calendar-container {
+            background: #ffcce0;
+            border: 5px solid #ff6f91;
+            border-radius: 30px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: center;
+            animation: fadeIn 1.2s ease;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        .google-calendar-container h3 {
+            text-align: center;
+            color: #ff6f91;
+            font-size: 26px;
+            margin-bottom: 15px;
+            font-family: 'Comic Sans MS', cursive;
+        }
+
+        .google-calendar-container iframe {
+            border-radius: 20px;
+            max-width: 100%;
+            width: 800px;
+            height: 600px;
+        }
+
+        .calendar-header {
+            text-align: center;
+            font-size: 30px;
+            color: #ff6f91;
+            padding: 15px;
+            border-radius: 20px;
+            background: #ffe6ec;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 25px;
+        }
+
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+            justify-content: center;
+        }
+
+        .day {
+            background: #ffb6c1;
+            border-radius: 20px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+            position: relative;
+        }
+
+        .day:hover {
+            transform: scale(1.08);
+        }
+
+        .important-notices {
+            background: #ffe6ec;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 25px;
+            text-align: center;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            background-color: #ffb6c1;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+
+        footer a {
+            color: #ff6f91;
+            text-decoration: none;
+            margin: 0 8px;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #ff4c99;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5); /* Dark background for modal */
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 5% auto;
+            padding: 25px;
+            border: 1px solid #888;
+            width: 80%;
+            border-radius: 20px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #ff6f91; /* Cute hover color for close */
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .event-type {
+            margin-top: 10px;
+        }
+
+        .event-type label {
+            margin-right: 10px;
+        }
+
+        button {
+            background: #ff6f91;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #ff4c99;
+        }
+
+        .notepad-container {
+            margin-top: 20px;
+            padding: 20px;
+            background: #ffe6ec;
+            border-radius: 20px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            animation: slideIn 1s ease;
+        }
+
+        @keyframes slideIn {
+            0% { transform: translateY(50px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        .notepad-container h4 {
+            color: #ff6f91;
+            font-size: 24px;
+            margin-bottom: 15px;
+            font-family: 'Comic Sans MS', cursive;
+        }
+
+        .notepad-container input,
+        .notepad-container textarea,
+        .notepad-container select {
+            width: calc(100% - 20px);
+            border-radius: 15px;
+            padding: 15px;
+            font-size: 18px;
+            border: 3px dashed #ff6f91;
+            background-color: #fff;
+            color: #333;
+            margin-bottom: 15px;
+            transition: background-color 0.3s ease;
+        }
+
+        .notepad-container input:focus,
+        .notepad-container textarea:focus {
+            background-color: #ffe0f5;
+        }
+
+        .notepad-controls {
+            margin-top: 15px;
+        }
+
+        .status {
+            display: block;
+            margin-top: 10px;
+            font-size: 15px;
+            color: #ff6f91;
+            font-weight: bold;
+        }
+
+        .status.saved {
+            color: #28a745; /* Green for saved status */
+        }
+
+        .status.unsaved {
+            color: #ff4c99; /* Pink for unsaved changes */
+        }
+
+        .priority {
+            margin-top: 10px;
+        }
+
+        .priority label {
+            margin-right: 10px;
+            font-size: 16px;
+            color: #ff6f91;
+        }
+
+        .date-picker {
+            margin-top: 10px;
+        }
+
+        .date-picker input {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>🌸 Study Planner Calendar 🌸</h1>
+        <nav>
+            <a href="home.html">🏠 Home</a>
+            <a href="courses.html">📚 Courses</a>
+            <a href="profile.html">👤 Profile</a>
+            <a href="dashboard.html">📊 Dashboard</a>
+        </nav>
+</header>
+<div id="warning-banner">
+    ⚠️ This site is still under development. Some features may not work perfectly. Please be patient! 💖
+</div>
+
+<div class="container">
+
+    <!-- Calendar Header -->
+    <div class="calendar-header">
+        <h2>📅 My Study Calendar 📅</h2>
+    </div>
+
+    <!-- Google Calendar Embed -->
+    <div class="google-calendar-container">
+        <h3>🌈 Your Google Calendar</h3>
+        <iframe src="https://calendar.google.com/calendar/embed?src=your-calendar-id&ctz=America/New_York" frameborder="0" scrolling="no"></iframe>
+    </div>
+
+    <!-- Calendar Days -->
+    <div class="calendar">
+        <div class="day">Mon</div>
+        <div class="day">Tue</div>
+        <div class="day">Wed</div>
+        <div class="day">Thu</div>
+        <div class="day">Fri</div>
+        <div class="day">Sat</div>
+        <div class="day">Sun</div>
+    </div>
+
+    <!-- Cute Notepad Section -->
+    <div class="notepad-container">
+        <h4>📝 My Cute Notepad</h4>
+        <input type="text" id="notepadTitle" placeholder="Title of the note..." />
+        <textarea id="notepad" placeholder="Write your notes here..."></textarea>
+
+        <div class="date-picker">
+            <input type="date" id="dueDate" />
+        </div>
+
+        <div class="priority">
+            <label for="priority">Priority:</label>
+            <select id="priority">
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+            </select>
+        </div>
+
+        <div class="notepad-controls">
+            <button onclick="saveNotes()">Save</button>
+            <button onclick="clearNotes()">Clear</button>
+            <button onclick="addToDo()">Add To-Do</button>
+        </div>
+        <span class="status" id="statusMessage"></span>
+    </div>
+
+    <!-- Important Notices -->
+    <div class="important-notices">
+        <h4>🚨 Important Notices</h4>
+        <ul>
+            <li>Don't forget to complete your assignment due on Friday! 🌟</li>
+            <li>Group study session on Wednesday at 2 PM. 📚</li>
+        </ul>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2024 Study Planner</p>
+    <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+</footer>
+
+<script>
+    function saveNotes() {
+        var title = document.getElementById('notepadTitle').value;
+        var notes = document.getElementById('notepad').value;
+        var dueDate = document.getElementById('dueDate').value;
+        var priority = document.getElementById('priority').value;
+
+        var noteData = {
+            title: title,
+            notes: notes,
+            dueDate: dueDate,
+            priority: priority
+        };
+
+        localStorage.setItem('userNote', JSON.stringify(noteData));
+        document.getElementById('statusMessage').textContent = 'Note saved! 💾';
+        document.getElementById('statusMessage').classList.add('saved');
+        setTimeout(function() {
+            document.getElementById('statusMessage').textContent = '';
+            document.getElementById('statusMessage').classList.remove('saved');
+        }, 2000);
+    }
+
+    function clearNotes() {
+        document.getElementById('notepadTitle').value = '';
+        document.getElementById('notepad').value = '';
+        document.getElementById('dueDate').value = '';
+        document.getElementById('priority').value = 'Low';
+        localStorage.removeItem('userNote');
+        document.getElementById('statusMessage').textContent = 'Notes cleared! 🗑️';
+        document.getElementById('statusMessage').classList.add('unsaved');
+        setTimeout(function() {
+            document.getElementById('statusMessage').textContent = '';
+            document.getElementById('statusMessage').classList.remove('unsaved');
+        }, 2000);
+    }
+
+    function addToDo() {
+        const toDo = document.getElementById('notepad').value;
+        if (toDo) {
+            document.getElementById('notepad').value += `\n- ${toDo}`; // Add to-do item to note
+            document.getElementById('statusMessage').textContent = 'To-Do added! ✅';
+            document.getElementById('statusMessage').classList.add('saved');
+            setTimeout(function() {
+                document.getElementById('statusMessage').textContent = '';
+                document.getElementById('statusMessage').classList.remove('saved');
+            }, 2000);
+        }
+    }
+
+    window.onload = function() {
+        var savedNote = localStorage.getItem('userNote');
+        if (savedNote) {
+            var noteData = JSON.parse(savedNote);
+            document.getElementById('notepadTitle').value = noteData.title;
+            document.getElementById('notepad').value = noteData.notes;
+            document.getElementById('dueDate').value = noteData.dueDate;
+            document.getElementById('priority').value = noteData.priority;
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,158 @@
+/* General Styles */
+body {
+  font-family: 'Comic Sans MS', cursive, sans-serif; /* Playful font */
+  margin: 0;
+  padding: 0;
+  background-color: #faf0e6; /* Light beige */
+  color: #333;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.dark-mode {
+  background-color: #4e4e4e; /* Darker background */
+  color: #f0f0f0;
+}
+
+header {
+  background-color: #ffb6c1; /* Light pink */
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 5px solid #ff69b4; /* Hot pink */
+}
+
+nav {
+  display: flex;
+  align-items: center;
+}
+
+nav a {
+  margin: 0 15px;
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+nav a:hover {
+  background-color: #ff69b4; /* Hot pink */
+  color: #fff;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+}
+
+.profile-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid #ff69b4; /* Hot pink */
+  margin-right: 10px;
+}
+
+.container {
+  padding: 20px;
+}
+
+/* Section Styles */
+section {
+  margin-bottom: 30px;
+  padding: 20px;
+  border-radius: 15px;
+  background-color: #ffffff; /* White */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border: 2px solid #ffb6c1; /* Light pink border */
+}
+
+h1, h2 {
+  color: #ff69b4; /* Hot pink */
+}
+
+button {
+  background-color: #ff69b4; /* Hot pink */
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+  background-color: #ff1493; /* Deep pink */
+  transform: scale(1.05); /* Slight grow effect */
+}
+
+/* Form Styles */
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="time"],
+input[type="url"],
+input[type="search"] {
+  padding: 10px;
+  margin: 10px 0;
+  border: 2px solid #ffb6c1; /* Light pink */
+  border-radius: 10px;
+  transition: border-color 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus {
+  border-color: #ff69b4; /* Hot pink */
+  outline: none;
+}
+
+/* List Styles */
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  background: #ffe4e1; /* Misty rose */
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Timer Styles */
+#timer-display {
+  font-size: 28px;
+  margin-top: 10px;
+  font-weight: bold;
+  color: #ff69b4; /* Hot pink */
+}
+
+/* Footer Styles */
+footer {
+  background-color: #ffb6c1; /* Light pink */
+  text-align: center;
+  padding: 15px;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  border-top: 5px solid #ff69b4; /* Hot pink */
+}
+
+footer a {
+  color: #333;
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}

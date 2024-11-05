@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fff8f3;
+            color: #4a4a4a;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        header {
+            background: linear-gradient(135deg, #ff8db4, #ff6f92);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-out;
+        }
+
+        header h1 {
+            font-size: 2.8em;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        header nav {
+            margin-top: 20px;
+        }
+
+        header nav a {
+            text-decoration: none;
+            margin: 10px;
+            color: white;
+            font-size: 1.2em;
+            font-weight: bold;
+            border-radius: 25px;
+            padding: 12px 20px;
+            background-color: #ff6b92;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        header nav a:hover {
+            background-color: #ff4c7f;
+            transform: translateY(-3px);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: #fff3f7;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .dashboard-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .dashboard-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .task-planner, .goal-setter, .schedule-creator {
+            background-color: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            padding: 30px;
+            width: 90%;
+            margin-bottom: 30px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .task-planner:hover, .goal-setter:hover, .schedule-creator:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            color: #ff4081;
+            font-family: 'Brush Script MT', cursive;
+            font-size: 1.8em;
+        }
+
+        input, textarea, select {
+            width: calc(100% - 20px);
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 15px;
+            border: 1px solid #ff69b4;
+            transition: border 0.3s, box-shadow 0.3s;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            border-color: #ff4081;
+            outline: none;
+            box-shadow: 0 0 5px rgba(255, 20, 147, 0.5);
+        }
+
+        .task-list, .goal-list, .schedule-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .task-list li, .goal-list li, .schedule-list li {
+            background-color: #ffe0f0;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 5px solid #ff4081;
+            position: relative;
+            font-size: 1.1em;
+        }
+
+        .task-list li:before, .goal-list li:before, .schedule-list li:before {
+            content: "🌟";
+            position: absolute;
+            left: -30px;
+            font-size: 1.5em;
+        }
+
+        button {
+            background-color: #ff4081;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.2s;
+            font-size: 1.1em;
+        }
+
+        button:hover {
+            background-color: #ff1493;
+            transform: translateY(-2px);
+        }
+
+        .remove-btn {
+            background-color: #ff6f61;
+            margin-left: 10px;
+        }
+
+        .remove-btn:hover {
+            background-color: #ff4a39;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        footer a {
+            text-decoration: none;
+            color: #ff4081;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        #warning-banner {
+            background-color: #fffb99;
+            color: #ff6f61;
+            text-align: center;
+            padding: 10px;
+            font-weight: bold;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            background-color: #fff4f4;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="home.html">🏠 Home</a>
+            <a href="courses.html">📚 Courses</a>
+            <a href="calendar.html">📅 Calendar</a>
+            <a href="profile.html">👤 Profile</a>
+        </nav>
+    </header>
+    <div id="warning-banner">
+        ⚠️ This site is still under development. Some features may not work perfectly. Please be patient! 💖
+    </div>
+
+    <div class="dashboard-container">
+        <div class="dashboard-header">
+            <h1>🌸 Welcome to Your Dashboard 🌸</h1>
+            <p>✨ Plan your study schedule, set goals, and track tasks! ✨</p>
+        </div>
+
+        <!-- Task Planner Section -->
+        <div class="task-planner">
+            <h2>📝 Task Planner</h2>
+            <input type="text" id="task-name" placeholder="Add a task..." />
+            <textarea id="task-details" placeholder="Task details..."></textarea>
+            <button onclick="addTask()">Add Task</button>
+            <ul id="task-list" class="task-list"></ul>
+        </div>
+
+        <!-- Goal Setter Section -->
+        <div class="goal-setter">
+            <h2>🎯 Goal Setter</h2>
+            <input type="text" id="goal-name" placeholder="Set a goal..." />
+            <textarea id="goal-details" placeholder="Goal details..."></textarea>
+            <button onclick="addGoal()">Set Goal</button>
+            <ul id="goal-list" class="goal-list"></ul>
+        </div>
+
+        <!-- Schedule Creator Section -->
+        <div class="schedule-creator">
+            <h2>📅 Schedule Creator</h2>
+            <select id="schedule-day">
+                <option value="">Select a day...</option>
+                <option value="Monday">Monday</option>
+                <option value="Tuesday">Tuesday</option>
+                <option value="Wednesday">Wednesday</option>
+                <option value="Thursday">Thursday</option>
+                <option value="Friday">Friday</option>
+                <option value="Saturday">Saturday</option>
+                <option value="Sunday">Sunday</option>
+            </select>
+            <input type="time" id="schedule-time" />
+            <input type="text" id="schedule-activity" placeholder="Add an activity..." />
+            <button onclick="addSchedule()">Add to Schedule</button>
+            <ul id="schedule-list" class="schedule-list"></ul>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Study Planner. All rights reserved. <a href="#">Contact Us</a></p>
+    </footer>
+
+    <script>
+        function addTask() {
+            const taskName = document.getElementById('task-name').value;
+            const taskDetails = document.getElementById('task-details').value;
+
+            if (taskName) {
+                const li = document.createElement('li');
+                li.textContent = `${taskName} - ${taskDetails}`;
+                
+                const removeBtn = document.createElement('button');
+                removeBtn.textContent = 'Remove';
+                removeBtn.className = 'remove-btn';
+                removeBtn.onclick = () => li.remove();
+
+                li.appendChild(removeBtn);
+                document.getElementById('task-list').appendChild(li);
+                document.getElementById('task-name').value = '';
+                document.getElementById('task-details').value = '';
+            }
+        }
+
+        function addGoal() {
+            const goalName = document.getElementById('goal-name').value;
+            const goalDetails = document.getElementById('goal-details').value;
+
+            if (goalName) {
+                const li = document.createElement('li');
+                li.textContent = `${goalName} - ${goalDetails}`;
+
+                const removeBtn = document.createElement('button');
+                removeBtn.textContent = 'Remove';
+                removeBtn.className = 'remove-btn';
+                removeBtn.onclick = () => li.remove();
+
+                li.appendChild(removeBtn);
+                document.getElementById('goal-list').appendChild(li);
+                document.getElementById('goal-name').value = '';
+                document.getElementById('goal-details').value = '';
+            }
+        }
+
+        function addSchedule() {
+            const day = document.getElementById('schedule-day').value;
+            const time = document.getElementById('schedule-time').value;
+            const activity = document.getElementById('schedule-activity').value;
+
+            if (day && time && activity) {
+                const li = document.createElement('li');
+                li.textContent = `${day} at ${time} - ${activity}`;
+
+                const removeBtn = document.createElement('button');
+                removeBtn.textContent = 'Remove';
+                removeBtn.className = 'remove-btn';
+                removeBtn.onclick = () => li.remove();
+
+                li.appendChild(removeBtn);
+                document.getElementById('schedule-list').appendChild(li);
+                document.getElementById('schedule-day').value = '';
+                document.getElementById('schedule-time').value = '';
+                document.getElementById('schedule-activity').value = '';
+            }
+        }
+    </script>
+</body>
+</html>
